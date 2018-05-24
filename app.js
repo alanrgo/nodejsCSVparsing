@@ -43,7 +43,7 @@ fs.readFile('input.csv', 'utf8', function (err,data) {
 	    if (err) throw err;
 
 	    // success case, the file was saved
-	    console.log('saved!');
+	    console.log('saved JSON object into output.txt!');
 	});
   });
 });
@@ -150,8 +150,10 @@ function make_user(usr, usr_info, labels){
 				}
 				if( !phoneUtil.isValidNumber(number))
 					valid = false
-				else 
+				else {
 					content.push(phoneUtil.format(number, PNF.E164))
+					content[0] = content[0].slice(1)
+				}
 			}
 			else if ( labels[i].type === "email"){
 				content = parse_content(usr_info[i])
@@ -178,23 +180,23 @@ function make_user(usr, usr_info, labels){
 			}
 
 			for( var j = 0; j < content.length; j ++ ){
-				if ( repeated_addr[content[j]] == undefined )
-					repeated_addr[content[j]] = 1
+				if( repeated_addr[content[j]] == undefined ){
+					addr = { "type": labels[i].type,
+						 "tags": labels[i].tags,
+						 "address": content[j]
+						}
+					usr.addresses.push(addr)
+					repeated_addr[content[j]] = usr.addresses.length - 1
+				}
 				else{
+					usr.addresses[repeated_addr[content[j]]].tags = usr.addresses[repeated_addr[content[j]]].tags.concat(labels[i].tags)
 					continue
 				}
-
-				addr = { "type": labels[i].type,
-					 "tags": labels[i].tags,
-					 "address": content[j]
-					}
-				usr.addresses.push(addr)
 			}
 		}
 	}
 	/*****************************************************************
 	* Post processing
-	*
 	*****************************************************************/
 
 	/* Turn one instance lists into string for labels classes */
@@ -219,6 +221,9 @@ function get_tags(label){
 
 function parse_content(content){
 	array = content.split(/[,;\/]+/)
+	for ( var i = 0; i < array.length; i ++ ){
+		array[i] = array[i].trim()
+	}
 	return array
 }
 

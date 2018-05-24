@@ -3,12 +3,12 @@
     "fullname": "John Doe 1",
     "eid": "1234",
     "classes": [
-      "Sala 1 ",
-      " Sala 2",
+      "Sala 1",
+      "Sala 2",
       "Sala 3",
       "Sala 4",
       "Sala 5",
-      " Sala 6"
+      "Sala 6"
     ],
     "addresses": [
       {
@@ -17,7 +17,7 @@
           "Responsável",
           "Mãe"
         ],
-        "address": "+551138839332"
+        "address": "551138839332"
       },
       {
         "type": "email",
@@ -54,7 +54,7 @@
         "tags": [
           "Pai"
         ],
-        "address": "+5519985504400"
+        "address": "5519985504400"
       },
       {
         "type": "phone",
@@ -62,7 +62,7 @@
           "Responsável",
           "Mãe"
         ],
-        "address": "+551138839333"
+        "address": "551138839333"
       }
     ],
     "invisible": true,
@@ -104,7 +104,8 @@
       {
         "type": "email",
         "tags": [
-          "Mãe"
+          "Mãe",
+          "Aluno"
         ],
         "address": "victordoe3@gmail.com"
       },
@@ -113,7 +114,7 @@
         "tags": [
           "Aluno"
         ],
-        "address": "+551974430033"
+        "address": "551974430033"
       }
     ],
     "see_all": false,
